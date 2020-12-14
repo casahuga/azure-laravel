@@ -1,4 +1,4 @@
-FROM php:7.2.6-apache
+FROM php:7.3.24-apache
 MAINTAINER Xavier Casahuga <casahuga@gmail.com>
 
 COPY apache2.conf /bin/
@@ -20,11 +20,12 @@ RUN apt-get update \
          libicu-dev \
          libgmp-dev \
          libmagickwand-dev \
+         libzip-dev \
          cron \
          openssh-server \
                  curl \
                  git \
-                 mysql-client \
+                 mariadb-client \
                  nano \
                  sudo \
                  tcptraceroute \
@@ -39,7 +40,7 @@ RUN apt-get update \
     && ln -s /usr/include/x86_64-linux-gnu/gmp.h /usr/include/gmp.h \
     && rm -rf /var/lib/apt/lists/* \
     && pecl install imagick-beta \
-    && pecl install mcrypt-1.0.1 \
+    && pecl install mcrypt-1.0.2 \
     && pecl install -o -f redis \
     && docker-php-ext-configure gd --with-png-dir=/usr --with-jpeg-dir=/usr \
     && docker-php-ext-install gd \
